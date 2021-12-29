@@ -1,0 +1,27 @@
+.carousel-container {
+	margin-top: 50px;
+	width: 404px;
+	height: 400px;
+	max-width: 404px;
+	text-align: center;
+	background-image: url("../../../assets/images/home-animations/back.png");
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* display: grid;
+	grid-column: 1;
+	grid-row: 1; */
+}
+
+.carousel-margin {
+	margin-top: -400px;
+}
+
+.carousel-anim {
+	grid-row-start: 1;
+	grid-column-start: 1;
+}
+
+.item {
+	width: 400px;
+	height: 400px;
+};

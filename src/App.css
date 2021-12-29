@@ -1,0 +1,21 @@
+body {
+  background-image: url("./assets/images/background.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.App {
+  text-align: center;
+}
+
+.frow {
+  display: 'flex';
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+text-white {
+  color: white;
+}
