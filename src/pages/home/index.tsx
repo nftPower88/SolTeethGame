@@ -114,7 +114,7 @@ const Home = (props: HomeProps) => {
         <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
       </>  : <ConnectButton>Connect Wallet</ConnectButton>
       }
-      <IntroCarousel />
+      {!wallet.connected && <IntroCarousel />}
 
       {wallet.connected &&
         <Box marginBottom={2}>
