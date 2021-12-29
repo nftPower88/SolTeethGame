@@ -6,12 +6,14 @@ import './index.css';
 const Anim3 = () => {
     const carousel: any = useRef(null);
     
-    window.setInterval(function(){
-        if (carousel === null || carousel.current === null) {
-            return;
-        }
-        carousel.current.next();
-    }, 2500);
+    useEffect(() => {
+        window.setInterval(function(){
+            if (carousel === null || carousel.current === null) {
+                return;
+            }
+            carousel.current.next();
+        }, 2500);
+    }, []);
 
     return (
         <Carousel ref={carousel} dots={false}>

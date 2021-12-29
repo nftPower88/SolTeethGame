@@ -5,14 +5,15 @@ import './index.css';
 
 const Anim1 = () => {
     const carousel: any = useRef(null);
-    
-    window.setInterval(function(){
-        if (carousel === null || carousel.current === null) {
-            return;
-        }
-        carousel.current.next();
-    }, 1500);
 
+    useEffect(() => {
+        window.setInterval(function(){
+            if (carousel === null || carousel.current === null) {
+                return;
+            }
+            carousel.current.next();
+        }, 1500);
+    }, []);
     
     return (
         <Carousel ref={carousel} autoplay dots={false}>

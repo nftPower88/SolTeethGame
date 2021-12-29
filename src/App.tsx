@@ -36,9 +36,9 @@ import Home from './pages/home';
  const network = process.env.REACT_APP_SOLANA_NETWORK as WalletAdapterNetwork;
 
  const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
- const connection = new anchor.web3.Connection(rpcHost);
  console.log('rpcHost')
  console.log(rpcHost)
+ const connection = new anchor.web3.Connection(rpcHost);
  console.log('connection');
  console.log(connection);
 
