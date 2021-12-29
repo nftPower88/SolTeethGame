@@ -37,13 +37,19 @@ import Home from './pages/home';
 
  const rpcHost = process.env.REACT_APP_SOLANA_RPC_HOST!;
  const connection = new anchor.web3.Connection(rpcHost);
+ console.log('rpcHost')
+ console.log(rpcHost)
+ console.log('connection');
+ console.log(connection);
 
-const startDateSeed = parseInt(process.env.REACT_APP_CANDY_START_DATE!, 10);
+//const startDateSeed = parseInt(process.env.REACT_APP_CANDY_START_DATE!, 10);
 
-const txTimeout = 30000; // milliseconds (confirm this works for your project)
+//const txTimeout = 30000; // milliseconds (confirm this works for your project)
 
 const App = () => {
    const endpoint = useMemo(() => clusterApiUrl(network), []);
+   console.log('endpoint')
+   console.log(endpoint)
 
   const wallets = useMemo(
     () => [getPhantomWallet(), getSolflareWallet(), getSolletWallet()],

@@ -13,6 +13,5 @@
 
 .address-info {
     display: block;
-    width: 100%;
-    text-align: right;
+    width: 300px;    
 }
