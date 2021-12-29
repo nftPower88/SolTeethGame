@@ -4,14 +4,12 @@ import Countdown from "react-countdown";
 import { Box, Button, CircularProgress, Snackbar, Typography } from "@material-ui/core";
 import Alert from "@material-ui/lab/Alert";
 import * as anchor from "@project-serum/anchor";
-
 import { LAMPORTS_PER_SOL } from "@solana/web3.js";
-
 import { useWallet } from "@solana/wallet-adapter-react";
 import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
 import { withStyles } from "@material-ui/styles";
-//import {Fade} from "react-reveal";
 import IntroCarousel from "../components/IntroCarousel";
+import './index.css';
 
 const ConnectButton = styled(WalletDialogButton)``;
 
@@ -29,12 +27,12 @@ const MintButton = withStyles({
 })(Button)
 
 export interface HomeProps {
-  candyMachineId: anchor.web3.PublicKey;
-  config: anchor.web3.PublicKey;
+  // candyMachineId: anchor.web3.PublicKey;
+  // config: anchor.web3.PublicKey;
   connection: anchor.web3.Connection;
-  startDate: number;
-  treasury: anchor.web3.PublicKey;
-  txTimeout: number;
+  // startDate: number;
+  // treasury: anchor.web3.PublicKey;
+  // txTimeout: number;
 }
 
 const Home = (props: HomeProps) => {
@@ -44,7 +42,6 @@ const Home = (props: HomeProps) => {
   const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
 
   const [remainingCount, setRemainingCount] = useState(0)
-  const [redeemdedCount, setRedeemedCount] = useState(0)
   const [availableCount, setAvailableCount] = useState(0)
   
   const [alertState, setAlertState] = useState<AlertState>({
@@ -53,7 +50,7 @@ const Home = (props: HomeProps) => {
     severity: undefined,
   });
 
-  const [startDate, setStartDate] = useState(new Date(props.startDate));
+  //const [startDate, setStartDate] = useState(new Date(props.startDate));
 
   const wallet = useWallet(); 
 
@@ -84,37 +81,37 @@ const Home = (props: HomeProps) => {
     flexDirection: 'column' as any,
     justifyContent: 'space-evenly',
     alignItems: 'center',
-
   }
 
-  // "color"
-  // "ball"
-  // "lines"
-  // "thick"
-  // "circle"
-  // "cobweb"
-  // "polygon"
-  // "square"
-  // "tadpole"
-  // "fountain"
-  // "random"
-  // "custom"
+  const shortenAddress = (address:string) => {
+    return address.substr(0,4) + "..." + address.substr(address.length - 4)
+  }
 
   return (
     <main style={containerStyles}>
-      <div className="row">
-        <img src="images/tooth.png"></img>
-        <img src="images/title.png"></img>
-        <img src="images/tooth.png"></img>
-      </div>
-      {wallet.connected ?
-      <>
-        {/* <p>Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</p> */}
-        <p>Address: {wallet.publicKey?.toBase58()}</p>
-        <p>Balance: {(balance || 0).toLocaleString()} SOL</p>
-      </>  : <ConnectButton>Connect Wallet</ConnectButton>
+      {
+        !wallet.connected ? <>
+          <div className="row">
+            <img src="images/tooth.png"></img>
+            <img src="images/title.png"></img>
+            <img src="images/tooth.png"></img>
+          </div>
+          <ConnectButton>Connect Wallet</ConnectButton>
+          <IntroCarousel />
+        </> : <>
+          <div className="row banner">
+            <div className="little-title">
+              <img src="images/tooth.png"></img>
+              <img src="images/title.png"></img>
+              <img src="images/tooth.png"></img>
+            </div>
+            <div className="address-info">
+              <Typography variant="body1" style={{ color: '#9ca9b3' }}>Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</Typography>
+              <Typography variant="body1" style={{ color: '#9ca9b3' }}>Balance: {(balance || 0).toLocaleString()} SOL</Typography>
+            </div>
+          </div>  
+        </>
       }
-      {!wallet.connected && <IntroCarousel />}
 
       {wallet.connected &&
         <Box marginBottom={2}>
@@ -139,7 +136,7 @@ const Home = (props: HomeProps) => {
                   )
                   ) : (
                     <Countdown
-                    date={startDate}
+                    //date={startDate}
                     onMount={({ completed }) => completed && setIsActive(true)}
                     onComplete={() => setIsActive(true)}
                     renderer={renderCounter}
