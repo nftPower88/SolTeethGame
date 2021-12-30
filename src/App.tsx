@@ -1,5 +1,5 @@
 import "./App.css";
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 import ParticlesBg from 'particles-bg'
 
@@ -47,9 +47,8 @@ import Home from './pages/home';
 //const txTimeout = 30000; // milliseconds (confirm this works for your project)
 
 const App = () => {
-   const endpoint = useMemo(() => clusterApiUrl(network), []);
-   console.log('endpoint')
-   console.log(endpoint)
+  const endpoint = useMemo(() => clusterApiUrl(network), []);
+  const [appGameMode, setAppGameMode] = useState<number>(0);
 
   const wallets = useMemo(
     () => [getPhantomWallet(), getSolflareWallet(), getSolletWallet()],
@@ -78,6 +77,8 @@ const App = () => {
                 //startDate={startDateSeed}
                 //treasury={treasury}
                 //txTimeout={txTimeout}
+                gameMode={appGameMode}
+                setGameMode={setAppGameMode}
               />
             </div>
           </WalletDialogProvider>

@@ -10,6 +10,7 @@ import { WalletDialogButton } from "@solana/wallet-adapter-material-ui";
 import { withStyles } from "@material-ui/styles";
 import IntroCarousel from "../components/IntroCarousel";
 import './index.css';
+import GameMode from "../components/GameMode";
 
 const ConnectButton = styled(WalletDialogButton)``;
 
@@ -32,23 +33,16 @@ export interface HomeProps {
   connection: anchor.web3.Connection;
   // startDate: number;
   // treasury: anchor.web3.PublicKey;
-  // txTimeout: number;
+  // txTimeout: number;  
+  gameMode: number;
+  setGameMode: any;
 }
 
 const Home = (props: HomeProps) => {
   const [balance, setBalance] = useState<number>();
-  const [isActive, setIsActive] = useState(false); // true when countdown completes
-  const [isSoldOut, setIsSoldOut] = useState(false); // true when items remaining is zero
-  const [isMinting, setIsMinting] = useState(false); // true when user got to press MINT
 
   const [remainingCount, setRemainingCount] = useState(0)
   const [availableCount, setAvailableCount] = useState(0)
-  
-  const [alertState, setAlertState] = useState<AlertState>({
-    open: false,
-    message: "",
-    severity: undefined,
-  });
 
   //const [startDate, setStartDate] = useState(new Date(props.startDate));
 
@@ -76,6 +70,12 @@ const Home = (props: HomeProps) => {
     })();
   }, [wallet, props.connection]);
 
+  const frowBetween = {
+    display: 'flex',
+    flexDirection: 'row' as any,
+    justifyContent: 'space-between',
+  }
+
   const containerStyles = {
     display: 'flex',
     flexDirection: 'column' as any,
@@ -101,78 +101,32 @@ const Home = (props: HomeProps) => {
         </> : <>
           <div className="row banner">
             <div className="little-title">
-              <img src="images/tooth.png"></img>
-              <img src="images/title.png"></img>
-              <img src="images/tooth.png"></img>
+                <img src="images/tooth.png"></img>
+                <img src="images/title.png"></img>
+                <img src="images/tooth.png"></img>
             </div>
             <div className="address-info">
               <Typography variant="body1" style={{ color: '#9ca9b3' }}>Address: {shortenAddress(wallet.publicKey?.toBase58() || "")}</Typography>
               <Typography variant="body1" style={{ color: '#9ca9b3' }}>Balance: {(balance || 0).toLocaleString()} SOL</Typography>
             </div>
-          </div>  
+          </div>
+          {
+            (props.gameMode === 0) ? <>
+              <GameMode setGameMode={props.setGameMode}/>
+            </> : <>
+            
+            </>
+          } 
         </>
       }
 
-      {wallet.connected &&
+      {/* {wallet.connected &&
         <Box marginBottom={2}>
           <Typography variant="body1" style={{ color: '#9ca9b3' }}>Remained {remainingCount} of {availableCount} NFTs</Typography>
         </Box>
-      }
-
-      <MintContainer>
-        {wallet.connected && 
-        <MintButton
-          color="primary"
-          disabled={isSoldOut || isMinting || !isActive}
-          variant="contained"
-        >
-          {isSoldOut ? (
-            "SOLD OUT"
-            ) : isActive ? (
-              isMinting ? (
-                <CircularProgress />
-                ) : (
-                  "MINT"
-                  )
-                  ) : (
-                    <Countdown
-                    //date={startDate}
-                    onMount={({ completed }) => completed && setIsActive(true)}
-                    onComplete={() => setIsActive(true)}
-                    renderer={renderCounter}
-                    />
-                    )}
-        </MintButton>
-        }
-      </MintContainer>
-
-      <Snackbar
-        open={alertState.open}
-        autoHideDuration={6000}
-        onClose={() => setAlertState({ ...alertState, open: false })}
-      >
-        <Alert
-          onClose={() => setAlertState({ ...alertState, open: false })}
-          severity={alertState.severity}
-        >
-          {alertState.message}
-        </Alert>
-      </Snackbar>
+      } */}
+      
     </main>
-  );
-};
-
-interface AlertState {
-  open: boolean;
-  message: string;
-  severity: "success" | "info" | "warning" | "error" | undefined;
-}
-
-const renderCounter = ({ days, hours, minutes, seconds, completed }: any) => {
-  return (
-    <CounterText>
-      {hours} hours, {minutes} minutes, {seconds} seconds
-    </CounterText>
   );
 };
 

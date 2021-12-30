@@ -20,7 +20,12 @@ const navBar = () => {
   return (
     <div style={frowCenter}>
       <div style={{...frowBetween, width: '70%'}}>
-        {/* <div style={{...frowBetween, width: '25%'}}>
+         {/* <div>
+          <a href=''>
+            <img src="images/tooth-li-1.png" style={{width: '30px'}}/>
+          </a>  
+        </div>
+        <div style={{...frowBetween, width: '25%'}}>
           <Button style={{color: 'white'}} href='https://discord.com/'>Discord</Button>
           <Button style={{background: '#6163ff', color: 'white'}} href='https://twitter.com/'>Twitter</Button>
         </div> */}
